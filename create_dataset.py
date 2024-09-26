@@ -1,9 +1,8 @@
 import numpy as np
 import pandas as pd
 import os
-from azdet.utils.convert_annot import json_to_csv
+from azdet.utils.convert_annot import json_to_csv, csv_to_coco
 from v9_frequencies import labeled_frequencies
-from azdet.utils.convert_annot import csv_to_coco
 import multiprocessing as mp
 
 def get_imgs_per_path(dict_or_list, create_csv=True):
@@ -115,17 +114,17 @@ def process_file(csv_file):
     if not os.path.exists(json_file):
         csv_to_coco(csv_file, json_file)
 
-# Get all CSV files in the data directory
-csv_files = [f for f in os.listdir('data') if f.endswith('.csv')]
+# # Get all CSV files in the data directory
+# csv_files = [f for f in os.listdir('data') if f.endswith('.csv')]
 
-# Create a pool of workers
-pool = mp.Pool(processes=mp.cpu_count())
+# # Create a pool of workers
+# pool = mp.Pool(processes=mp.cpu_count())
 
-# Process files in parallel
-pool.map(process_file, [os.path.join('data', f) for f in csv_files])
+# # Process files in parallel
+# pool.map(process_file, [os.path.join('data', f) for f in csv_files])
 
-# Close the pool
-pool.close()
-pool.join()
+# # Close the pool
+# pool.close()
+# pool.join()
 
-print("Conversion of CSV files to COCO JSON format completed.")
+# print("Conversion of CSV files to COCO JSON format completed.")
